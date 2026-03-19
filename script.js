@@ -24,6 +24,7 @@
         const recipientName = document.getElementById('recipientName');
         const certificateDate = document.getElementById('certificateDate');
         const statusDisplay = document.getElementById('statusDisplay');
+        const qrCodeContainer = document.getElementById('qrCode');
         
         // Initialize with today's date
         function setTodayDate() {
@@ -37,6 +38,27 @@
         function formatDateForDisplay(date) {
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             return date.toLocaleDateString('en-US', options);
+        }
+        
+        // Generate QR Code
+        function generateQRCode(studentName, certificateType) {
+            // Clear previous QR code
+            qrCodeContainer.innerHTML = '';
+            
+            if (!studentName) return;
+            
+            // Create verification URL with student name and certificate type
+            const verificationUrl = `https://verify.inabacademy.edu/certificate?student=${encodeURIComponent(studentName)}&type=${encodeURIComponent(certificateType)}`;
+            
+            // Generate QR code
+            new QRCode(qrCodeContainer, {
+                text: verificationUrl,
+                width: 80,
+                height: 80,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
         }
         
         // Populate student list
@@ -92,11 +114,15 @@
                         certificateTitle.textContent = `Certificate of ${selectedType}`;
                         certificateTitle.style.color = 'var(--secondary-color)';
                     }
+                    
+                    // Generate QR code
+                    generateQRCode(selectedStudentName, selectedType);
                 }
             } else {
                 recipientName.textContent = '[Student Name]';
                 statusDisplay.textContent = 'Status: Not Selected';
                 statusDisplay.className = 'status-display';
+                qrCodeContainer.innerHTML = '';
             }
             
             // Update date

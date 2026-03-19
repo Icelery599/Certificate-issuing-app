@@ -100,16 +100,6 @@
             flex-direction: column;
             align-items: center;
         }
-
-        .print-area {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        .screen-only {
-            display: block;
-        }
         
         .section-title {
             font-size: 1.5rem;
@@ -432,6 +422,36 @@
             gap: 8px;
         }
         
+        .qr-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .qr-code-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        
+        .qr-code-container canvas {
+            display: block;
+            border-radius: 4px;
+        }
+        
+        .qr-text {
+            font-size: 0.75rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin: 0;
+        }
+        
         footer {
             text-align: center;
             margin-top: 40px;
@@ -476,42 +496,14 @@
         }
         
         @media print {
-            @page {
-                size: auto;
-                margin: 0.5in;
-            }
-
-            body {
-                background: white;
-                padding: 0;
-            }
-
-            .container,
-            .main-content,
-            .certificate-display,
-            .print-area {
-                display: block;
-                width: 100%;
-                max-width: none;
-                margin: 0;
-                padding: 0;
-                box-shadow: none;
-                background: transparent;
-            }
-
-            header,
-            .control-panel,
-            .screen-only,
-            footer {
-                display: none !important;
+            .control-panel, .print-btn, footer {
+                display: none;
             }
             
             .certificate {
-                max-width: none;
-                border: 12px solid var(--primary-color);
+                border: 20px solid var(--primary-color);
                 box-shadow: none;
                 margin: 0;
                 padding: 30px;
-                break-inside: avoid;
             }
         }
