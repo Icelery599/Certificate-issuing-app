@@ -100,6 +100,16 @@
             flex-direction: column;
             align-items: center;
         }
+
+        .print-area {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .screen-only {
+            display: block;
+        }
         
         .section-title {
             font-size: 1.5rem;
@@ -466,14 +476,42 @@
         }
         
         @media print {
-            .control-panel, .print-btn, footer {
-                display: none;
+            @page {
+                size: auto;
+                margin: 0.5in;
+            }
+
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container,
+            .main-content,
+            .certificate-display,
+            .print-area {
+                display: block;
+                width: 100%;
+                max-width: none;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                background: transparent;
+            }
+
+            header,
+            .control-panel,
+            .screen-only,
+            footer {
+                display: none !important;
             }
             
             .certificate {
-                border: 20px solid var(--primary-color);
+                max-width: none;
+                border: 12px solid var(--primary-color);
                 box-shadow: none;
                 margin: 0;
                 padding: 30px;
+                break-inside: avoid;
             }
         }
