@@ -466,7 +466,28 @@
         }
         
         @media print {
-            .control-panel, .print-btn, footer {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .container,
+            .main-content,
+            .certificate-display {
+                max-width: none;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            header,
+            .control-panel,
+            .certificate-display > .section-title,
+            .certificate-display > .annotation,
+            .print-btn,
+            footer {
                 display: none;
             }
             
@@ -475,5 +496,8 @@
                 box-shadow: none;
                 margin: 0;
                 padding: 30px;
+                width: 100%;
+                max-width: none;
+                page-break-inside: avoid;
             }
         }
